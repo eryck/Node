@@ -1,10 +1,15 @@
-const express = require('express'); // invoca do express
+//Importações
+const express = require('express') // importa o express
+const bodyParser = require('body-parser') //Realiza o post da requisição para o Parser
 
 //importando o arquivo de rotas do usuário
 const userRoute = require('./routes/userRoute')
 
-const app = express(); //Cria a aplicação
+//Inicializa do Express e configuração da Porta
+const app = express() //Cria a aplicação
 const port = 3000 //Configura a porta
+
+app.use(bodyParser.urlencoded({extended: false}))//Configura o bodyParser no node
 
 userRoute(app) //injeção de dependencia para a rota
 

@@ -26,6 +26,14 @@ const userRoute = (app) => {
 
             res.send({users})
         })
+        .post((req, res) => { //Criação dos usuários
+            const users = getUsers()
+
+            users.push(req.body)
+            saveUsers(users)
+
+            res.status(201).send('OK')
+        })
 }
 
 module.exports = userRoute
