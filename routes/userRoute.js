@@ -50,6 +50,13 @@ const userRoute = (app) => {
             }))
             res.status(200).send('OK')
         })
+        .delete((req, res) => { //Remoção dos usuários
+            const user =getUsers()
+
+            saveUser(user.filter(user => user.id !== req.params.id))
+
+            res.status(200).send('OK')
+        })
 }
 
 module.exports = userRoute
