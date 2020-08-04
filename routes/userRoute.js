@@ -16,7 +16,7 @@ const getUsers = () => {
 }
 
 //Salva os usuários
-const saveUsers = (users) => fs.writeFileSync(filePath, JSON.stringify(users, null, '\t'))
+const saveUser = (users) => fs.writeFileSync(filePath, JSON.stringify(users, null, '\t'))
 
 //Cria a rota dos usuários
 const userRoute = (app) => {
@@ -30,9 +30,25 @@ const userRoute = (app) => {
             const users = getUsers()
 
             users.push(req.body)
-            saveUsers(users)
+            saveUser(users)
 
             res.status(201).send('OK')
+        })
+        .put((req, res) => { //Criação da rota para alteração dos usuários 
+            const users = getUsers()
+
+            //Recuperação do usuário pelo id para alteração
+            saveUser(users.map(user =>{
+                if(user.id === req.params.id){
+                    return{
+                        ...user,
+                        ...req.body
+                    }
+                }
+
+                return user
+            }))
+            res.status(200).send('OK')
         })
 }
 
