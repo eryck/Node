@@ -1,0 +1,5 @@
+const express = require('express'); // invoca do express
+const app = express(); //Cria a aplicação
+const port = 3000 //Configura a porta
+
+app.listen(port, () => console.log('Api rodando na porta 3000'))
